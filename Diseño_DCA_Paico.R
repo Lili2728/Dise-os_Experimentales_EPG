@@ -1,0 +1,32 @@
+
+# =============================================
+# DISEÑO EXPERIMENTAL - ACEITE ESENCIAL DE PAICO
+# =============================================
+
+library(agricolae)
+library(tidyverse)
+
+# Definir los tratamientos (concentraciones)
+tratamientos <- c("0%", "0.25%", "0.5%", "1%", "2%", "4%")
+
+# Generar el diseño DCA
+set.seed(123)  # Para que sea reproducible
+
+dca_paico <- design.crd(trt = tratamientos, 
+                        r = 4,                    # 4 repeticiones
+                        seed = 123, 
+                        randomization = TRUE)
+
+# Ver el diseño
+print(dca_paico)
+
+# Ver las primeras filas del libro de campo
+head(dca_paico$book)
+
+# Resumen del diseño
+cat("=== RESUMEN DEL DISEÑO ===\n")
+cat("Diseño:", dca_paico$parameters$design, "\n")
+cat("Número de tratamientos:", length(tratamientos), "\n")
+cat("Repeticiones por tratamiento:", dca_paico$parameters$r, "\n")
+cat("Total de unidades experimentales:", nrow(dca_paico$book), "\n")
+
